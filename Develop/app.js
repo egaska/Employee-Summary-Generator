@@ -1,18 +1,31 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const render = require("./lib/htmlRenderer")
+
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+//const for output HTML file. 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
 
+
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+function promptUser() {
+
+    managerPrompts();
+    if (answers.addEmployee = true) inquirer.prompt([
+
+    ])
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -33,3 +46,95 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+function choicesPrompts() {
+    return inquirer.prompt([
+        {
+            type: "checkbox",
+            name: "employeeType",
+            message: "What kind of employee would you like to add?",
+            choices: ["Engineer", "Intern"]
+        }
+    ])
+}
+function engineerPrompts() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the engineer's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is their ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is their email?"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What is their GitHub username?"
+        },
+        {
+            type: "confirm",
+            name: "addEmployee",
+            message: "Add another employee?"
+
+        }
+    ])
+}
+
+function internPrompts() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the intern's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is their ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is their email?"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What school do they attend?"
+        }
+    ])
+};
+
+function managerPrompts() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the manager's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is their ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is their email?"
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "What is their office number?"
+        }
+    ])
+}
