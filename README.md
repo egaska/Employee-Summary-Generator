@@ -1,5 +1,5 @@
 
-# Employee Summary
+# Employee Summary Generator
 ## Description
 ![maintained badge](https://img.shields.io/badge/Maintained%3F-true-blue)  <br /> 
 This program creates a HTML profile for an engineering team.

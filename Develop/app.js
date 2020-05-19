@@ -73,26 +73,22 @@ function addTeam() {
                     if (employeeType === "Engineer") {
                         let newEmployee = new Engineer(data.name, data.id, data.email, data.varQuestion);
                         team.push(newEmployee);
-                        console.log(team);
                     }
                     else if (employeeType === "Manager") {
                         let newEmployee = new Manager(data.name, data.id, data.email, data.varQuestion);
                         team.push(newEmployee);
-                        console.log(team);
+               
                     }
                     else {
                         let newIntern = new Intern(data.name, data.id, data.email, data.varQuestion);
                         team.push(newIntern);
-                        console.log(team);
+                       
                     }
                     //If statement determines if the addTeam() runs again
-                    console.log(data.newMember);
                     if (data.newMember === true) {
-                        console.log(team);
                         addTeam();
                     }
                     else {
-                        console.log(team);
                         createHTML(render(team));
                     }
 
