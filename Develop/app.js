@@ -27,114 +27,83 @@ function addTeam() {
             choices: ["Manager", "Engineer", "Intern"]
         }])
         .then(function (data) {
-            console.log(data.employeeType);
+            let varQuestion = "";
             if (data.employeeType === "Engineer") {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        name: "name",
-                        message: "What is the engineer's name?"
-                    },
-                    {
-                        type: "input",
-                        name: "id",
-                        message: "What is their ID?"
-                    },
-                    {
-                        type: "input",
-                        name: "email",
-                        message: "What is their email?"
-                    },
-                    {
-                        type: "input",
-                        name: "github",
-                        message: "What is their GitHub username?"
-                    },
-                ])
-                    .then(function (data) {
-                        let newTeam = new Engineer(data.name, data.id, data.email, data.github);
-                        team.push(newTeam);
-                    })
+                varQuestion = "Github Username";
+                employeeType = "Engineer";
             }
             else if (data.employeeType === "Manager") {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        name: "name",
-                        message: "What is the manager's name?"
-                    },
-                    {
-                        type: "input",
-                        name: "id",
-                        message: "What is their ID?"
-                    },
-                    {
-                        type: "input",
-                        name: "email",
-                        message: "What is their email?"
-                    },
-                    {
-                        type: "input",
-                        name: "officeNumber",
-                        message: "What is their office number?"
+                varQuestion = "office number";
+                employeeType = "Manager";
+            }
+            else {
+                varQuestion = "school"
+                employeeType = "Intern";
+            }
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is their name?",
+                    name: "name"
+                },
+                {
+                    type: "input",
+                    message: "What is their ID?",
+                    name: "id"
+                },
+                {
+                    type: "input",
+                    message: "What is their email?",
+                    name: "email"
+                },
+                {
+                    type: "input",
+                    message: "What is their " + varQuestion + "?",
+                    name: "varQuestion"
+                },
+                {
+                    type: "confirm",
+                    message: "Would you like to make another employee?",
+                    name: "newMember"
+                }])
+                .then(function(data){
+                    if (employeeType === "Engineer"){
+                        let newEmployee = new Engineer(data.name, data.id, data.email, data.varQuestion);
+                        team.push(newEmployee);
+                        console.log(team);
                     }
-                ]).then(function (data) {
-                    let newManager = new Manager(data.name, data.id, data.email, data.officeNumber);
-                    team.push(newManager);
-                    console.log(team);
+                    else if(employeeType === "Manager") {
+                        let newEmployee = new Manager(data.name, data.id, data.email, data.officeNumber);
+                        team.push(newEmployee);
+                        console.log(team);
+                    }
+                    else {
+                        let newIntern = new Intern(data.name, data.id, data.email, data.officeNumber);
+                        team.push(newIntern);
+                        console.log(team);
+                    }
+
                 })
-
-            }
-            else {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        name: "name",
-                        message: "What is the intern's name?"
-                    },
-                    {
-                        type: "input",
-                        name: "id",
-                        message: "What is their ID?"
-                    },
-                    {
-                        type: "input",
-                        name: "email",
-                        message: "What is their email?"
-                    },
-                    {
-                        type: "input",
-                        name: "school",
-                        message: "What school do they attend?"
-                    }
-                ])
-            }
-
-        
-        })
-
-
-}
-
-function addAnother(){
-    let addAnother = false;
-    inquirer.prompt([
-        {
-            type: "confirm",
-            name: "newEmployee",
-            message: "Would you like to add another employee?"
-        }
-    ])
-        .then(function (data) {
-            addAnother = data.newEmployee;
-            if (addAnother === true) {
-                addTeam();
-            }
-            else {
-                console.log(team);
-            }
         })
 }
+
+// function addAnother(){
+//     inquirer.prompt([
+//         {
+//             type: "confirm",
+//             name: "newEmployee",
+//             message: "Would you like to add another employee?"
+//         }
+//     ])
+//         .then(function (data) {
+//             if (data.newEmployee === true) {
+//                 addTeam();
+//             }
+//             else {
+//                 console.log(team);
+//             }
+//         })
+// }
 
 
 
